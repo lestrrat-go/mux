@@ -8,12 +8,7 @@ import (
 )
 
 const (
-	TokInvalid = -1
-	TokEOF     = iota
-	TokLiteral
-	TokOpenBrace
-	TokCloseBrace
-	TokColon
+	tEOF = iota
 )
 
 type position struct {
@@ -79,7 +74,7 @@ func (t *tokenizer) Token() (int, interface{}, position, error) {
 	r := t.peek()
 	switch r {
 	case utf8.RuneError:
-		return TokEOF, nil, pos, io.EOF
+		return tEOF, nil, pos, io.EOF
 	case '{':
 		tok = tOpenBrace
 		lit = "{"

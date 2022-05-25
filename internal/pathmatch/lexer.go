@@ -36,7 +36,7 @@ func (l *lexer) Lex(lval *yySymType) int {
 		go l.emitError(err)
 		return -1
 	}
-	if tok == TokEOF {
+	if tok == tEOF {
 		return 0
 	}
 

@@ -24,7 +24,7 @@ func TestTokenizer(t *testing.T) {
 			Input: "/foo/bar/baz/{id}/view",
 			Expected: []TokReturn{
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "/foo/bar/baz/",
 					Pos: position{
 						line: 1,
@@ -32,7 +32,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokOpenBrace,
+					Tok: tOpenBrace,
 					Lit: "{",
 					Pos: position{
 						line: 1,
@@ -40,7 +40,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "id",
 					Pos: position{
 						line: 1,
@@ -48,7 +48,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokCloseBrace,
+					Tok: tCloseBrace,
 					Lit: "}",
 					Pos: position{
 						line: 1,
@@ -56,7 +56,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "/view",
 					Pos: position{
 						line: 1,
@@ -64,7 +64,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokEOF,
+					Tok: tEOF,
 					Pos: position{
 						line: 1,
 						col:  23,
@@ -77,7 +77,7 @@ func TestTokenizer(t *testing.T) {
 			Input: "/foo/bar/baz/{id:^[0-9]+}/view",
 			Expected: []TokReturn{
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "/foo/bar/baz/",
 					Pos: position{
 						line: 1,
@@ -85,7 +85,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokOpenBrace,
+					Tok: tOpenBrace,
 					Lit: "{",
 					Pos: position{
 						line: 1,
@@ -93,7 +93,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "id",
 					Pos: position{
 						line: 1,
@@ -101,7 +101,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokColon,
+					Tok: tColon,
 					Lit: ":",
 					Pos: position{
 						line: 1,
@@ -109,7 +109,7 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokLiteral,
+					Tok: tLiteral,
 					Lit: "^[0-9]+",
 					Pos: position{
 						line: 1,
@@ -117,10 +117,26 @@ func TestTokenizer(t *testing.T) {
 					},
 				},
 				{
-					Tok: TokEOF,
+					Tok: tCloseBrace,
+					Lit: "}",
 					Pos: position{
 						line: 1,
-						col:  23,
+						col:  25,
+					},
+				},
+				{
+					Tok: tLiteral,
+					Lit: "/view",
+					Pos: position{
+						line: 1,
+						col:  26,
+					},
+				},
+				{
+					Tok: tEOF,
+					Pos: position{
+						line: 1,
+						col:  31,
 					},
 					Err: io.EOF,
 				},

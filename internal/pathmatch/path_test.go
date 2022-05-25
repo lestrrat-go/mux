@@ -3,7 +3,7 @@ package pathmatch_test
 import (
 	"testing"
 
-	"github.com/lestrrat-go/mux/internal/path"
+	"github.com/lestrrat-go/mux/internal/pathmatch"
 	"github.com/stretchr/testify/require"
 )
 
@@ -24,7 +24,7 @@ func TestParse(t *testing.T) {
 	for _, tc := range testcases {
 		tc := tc
 		t.Run(tc.Pattern, func(t *testing.T) {
-			p, err := path.Parse(tc.Pattern)
+			p, err := pathmatch.Parse(tc.Pattern)
 			require.NoError(t, err, `path.Parse should succeed`)
 
 			mv, err := p.Match(tc.Input)
